@@ -15,10 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/index', function () {
+    return view('index');
+});
+
+Auth::routes(['verify' => true]);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/details', 'OrderController@details')->name('home');
+Route::get('/signin', 'OrderController@signin')->name('signin');
+Route::post('/check_amount', 'OrderController@checkAmount')->name('check_amount');
 
+Route::group(['middleware' => ['auth','userRole']], function () {
+    Route::get('/userHome', 'UserController@userHome')->name('userHome');
+});
 
 Auth::routes(['verify' => true]);
 

@@ -1,130 +1,144 @@
+<!--
+	Author: W3layouts
+	Author URL: http://w3layouts.com
+	License: Creative Commons Attribution 3.0 Unported
+	License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE html>
-<html>
+<html lang="zxx">
+
 <head>
+    <title>Wings by nineseas logistics</title>
+    <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>InfyOm Laravel Generator | Registration Page</title>
+    <meta name="keywords" content="wings by ninesasa logistics order Form , shipping in Lagos, Sign up with Wings , We move your logistics for you at Wings, Wings logistics is here, wings by nineseas" />
 
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <script>
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-
-    <!-- Theme style -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/css/skins/_all-skins.min.css">
-
-    <!-- iCheck -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/_all.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta-Tags -->
+    <!-- Stylesheets {{ URL::asset('css/css.css') }} -->
+    <link href="{{ URL::asset('css/style.css') }}" rel='stylesheet' type='text/css' />
+    <!--// Stylesheets -->
+    <!--fonts-->
+    <!-- title -->
 </head>
-<body class="hold-transition register-page">
-<div class="register-box">
-    <div class="register-logo">
-        <a href="{{ url('/home') }}"><b>InfyOm </b>Generator</a>
-    </div>
 
-    <div class="register-box-body">
-        <p class="login-box-msg">Register a new membership</p>
-
-        <form method="post" action="{{ url('/register') }}">
+<body>
+    <header>
+        <h1>Wings by Nineseas Logistics</h1>
+    </header>
+    <div class="w3ls-contact">
+        <!-- form starts here -->
+        <form action="{{ url('/register') }}" method="post">
             @csrf
 
-            <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name">
+            <div class="agile-field-txt has-feedback {{ $errors->has('first_name') ? ' has-error' : '' }}">
+                <label>
+                    First Name:</label>
+                <input type="text" name="first_name" placeholder="Enter First Name" value="{{ old('first_name') }}" required="" />
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
-
-                @if ($errors->has('name'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
-                    </span>
+                @if ($errors->has('first_name'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('first_name') }}</strong>
+                </span>
                 @endif
             </div>
 
-            <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+            <div class="agile-field-txt has-feedback {{ $errors->has('last_name') ? ' has-error' : '' }}">
+                <label>
+                    Last Name:</label>
+                <input type="text" name="last_name" placeholder="Enter Last Name" value="{{ old('last_name') }}" required="" />
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                @if ($errors->has('last_name'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('last_name') }}</strong>
+                </span>
+                @endif
+            </div>
+
+            <div class="agile-field-txt has-feedback {{ $errors->has('phone') ? ' has-error' : '' }}">
+                <label>
+                    Phone:</label>
+                <input type="text" name="phone" placeholder="Enter Phone" value="{{ old('phone') }}" required="" />
+                <span class="glyphicon glyphicon-mobile form-control-feedback"></span>
+                @if ($errors->has('phone'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('phone') }}</strong>
+                </span>
+                @endif
+            </div>
+
+            <div id="locationField" class="agile-field-txt has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+                <label>
+                    Email Address:</label>
+                <input type="text" name="email" placeholder="Enter Email Address" value="{{ old('email') }}" required="" />
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-
                 @if ($errors->has('email'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
+                <span class="help-block">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
                 @endif
             </div>
 
-            <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
-                <input type="password" class="form-control" name="password" placeholder="Password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-
+            <div class="agile-field-txt has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
+                <label>
+                    Password:</label>
+                <input type="password" name="password" placeholder="Enter Password " required="" />
                 @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
+                <span class="help-block">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
                 @endif
             </div>
 
-            <div class="form-group has-feedback{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+            <div class="agile-field-txt has-feedback {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                <label>
+                    Re-type Password:</label>
                 <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-
                 @if ($errors->has('password_confirmation'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                    </span>
+                <span class="help-block">
+                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                </span>
                 @endif
             </div>
 
-            <div class="row">
-                <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> I agree to the <a href="#">terms</a>
-                        </label>
-                    </div>
-                </div>
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
-                </div>
-                <!-- /.col -->
+            <a href="{{ url('/signin') }}" class="link">Already have an account. Login here</a><br>
+
+            <div class="w3ls-contact  w3l-sub">
+                <input type="submit" value="Register">
             </div>
+
         </form>
-
-        <a href="{{ url('/login') }}" class="text-center">I already have a membership</a>
     </div>
-    <!-- /.form-box -->
-</div>
-<!-- /.register-box -->
+    <!-- //form ends here -->
+    <div class="copy-wthree">
+        <p>© {{ date('Y') }} Wings Shipping Form . All Rights Reserved | Design by
+            <a href="http://odysoft.com/" target="_blank">odysoft</a>
+        </p>
+    </div>
+</body>
+<!-- //Body -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<!-- AdminLTE App -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/js/adminlte.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
-
+<style>
+    .help-block {
+        color: red
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
+    $(document).ready(function() {
+        $(".navigate").click(function() {
+            $(location).attr('href', '{{ url("/register") }}')
         });
     });
 </script>
-</body>
+
 </html>
