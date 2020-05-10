@@ -39,7 +39,7 @@
     </header>
     <div class="w3ls-contact">
         <!-- form starts here -->
-        <form action="{{ route('check_amount') }}" method="post">
+        <form action="{{ route('login') }}" method="post">
             @csrf
 
             <div id="locationField" class="agile-field-txt has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">

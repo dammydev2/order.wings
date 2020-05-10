@@ -110,7 +110,7 @@
                 @endif
             </div>
 
-            <a href="{{ url('/signin') }}" class="link">Already have an account. Login here</a><br>
+            <a href="{{ url('/login') }}" class="link">Already have an account. Login here</a><br>
 
             <div class="w3ls-contact  w3l-sub">
                 <input type="submit" value="Register">

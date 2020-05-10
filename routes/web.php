@@ -23,13 +23,14 @@ Auth::routes(['verify' => true]);
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/details', 'OrderController@details')->name('home');
+Route::get('/details', 'OrderController@details')->name('details');
 Route::get('/signin', 'OrderController@signin')->name('signin');
 Route::post('/check_amount', 'OrderController@checkAmount')->name('check_amount');
 
-Route::group(['middleware' => ['auth','userRole']], function () {
+Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/userHome', 'UserController@userHome')->name('userHome');
+    Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay'); 
+    Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 });
 
 Auth::routes(['verify' => true]);

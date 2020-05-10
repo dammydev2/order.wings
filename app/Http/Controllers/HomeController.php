@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(\Auth::User()->role === 'user'){
+            return redirect('userHome');
+        }
         return view('home');
     }
 }
