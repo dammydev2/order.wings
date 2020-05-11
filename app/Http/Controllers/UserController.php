@@ -10,4 +10,11 @@ class UserController extends Controller
     {
         return view('user.userHome');
     }
+
+    public function makePayment()
+    {
+        return view('user.makePayment');
+    }
+
+
 }

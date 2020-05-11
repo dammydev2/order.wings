@@ -29,6 +29,7 @@ Route::post('/check_amount', 'OrderController@checkAmount')->name('check_amount'
 
 Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/userHome', 'UserController@userHome')->name('userHome');
+    Route::get('/makePayment', 'UserController@makePayment')->name('makePayment');
     Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay'); 
     Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 });

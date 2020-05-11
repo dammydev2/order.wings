@@ -44,7 +44,7 @@
             <li>Despatch Amount: <b>&#8358; {{ number_format($order['amount'], 2) }}</b></li>
 
             <div class="w3ls-contact  w3l-sub">
-                <a href="{{ route('signin') }}" class="button-link">Login/Register to Confirm order</a>
+                <a href="{{ url('login') }}" class="button-link">Login/Register to Confirm order</a>
             </div>
 
         </form>

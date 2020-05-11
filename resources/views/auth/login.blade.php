@@ -66,8 +66,7 @@
             </div>
 
             <a href="{{ url('/password/reset') }}" class="link">I forgot my password</a><br>
-           <a href="{{ url('/register') }}" class="link text-right">Register a new membership</a>
-
+           
             <div class="w3ls-contact  w3l-sub">
                 <input type="submit" value="Log In">
             </div>
