@@ -27,11 +27,15 @@ Route::get('/details', 'OrderController@details')->name('details');
 Route::get('/signin', 'OrderController@signin')->name('signin');
 Route::post('/check_amount', 'OrderController@checkAmount')->name('check_amount');
 
-Route::group(['middleware' => ['auth','verified']], function () {
+Route::group(['middleware' => ['verified','userRole']], function () {
     Route::get('/userHome', 'UserController@userHome')->name('userHome');
+    Route::get('/orderHistory', 'UserController@orderHistory')->name('orderHistory');
+    Route::get('/userTransactionHistory', 'UserController@userTransactionHistory')->name('userTransactionHistory');
+    Route::get('/addOrderDetails', 'UserController@addOrderDetails');
     Route::get('/makePayment', 'UserController@makePayment')->name('makePayment');
     Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay'); 
     Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+    Route::post('/enterDetails', 'UserController@enterDetails')->name('enterDetails'); 
 });
 
 Auth::routes(['verify' => true]);
