@@ -15,6 +15,10 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (\Auth::User()->role == 'admin') {
+            
+            return $next($request);
+        }
+        return redirect('home')->withMessage('you have to be an admin to view the page');
     }
 }

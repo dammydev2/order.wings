@@ -33,7 +33,13 @@
         <!-- Sidebar Menu -->
 
         <ul class="sidebar-menu" data-widget="tree">
+            @if(\Auth::User()->role === 'admin')
             @include('layouts.menu')
+
+            @elseif(\Auth::User()->role === 'user')
+            @include('layouts.customerMenu')
+            
+            @endif
         </ul>
         <!-- /.sidebar-menu -->
     </section>

@@ -1,3 +1,9 @@
-<li><a href="">Index</a></li>
-
-<li><a href="{{ route('userHome') }}">Home</a></li>
+<li><a href="{{ url('home') }}">Home</a></li>
+<li><a href="{{ route('customerList') }}">Customer(s) list</a></li>
+<li><a href="{{ route('totalTransaction') }}">Total Transaction list</a></li>
+<li><a href="{{ route('dateTransaction') }}">Filter Transaction by Date</a></li>
+<li><a href="{{ route('allOrder') }}">All Order</a></li>
+<li><a href="{{ route('pendingOrder') }}">Pending Order</a></li>
+<li><a href="{{ route('enrouteOrder') }}">Enroute Order</a></li>
+<li><a href="{{ route('deliveredOrder') }}">Delivered Order</a></li>
+<li><a href="{{ route('addRider') }}">Add Rider</a></li>
