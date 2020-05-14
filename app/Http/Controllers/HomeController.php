@@ -16,7 +16,7 @@ class HomeController extends Controller
     protected $adminService;
     public function __construct(AdminService $adminService)
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth', 'verified']);
         $this->adminService = $adminService;
     }
 
@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(\Auth::User()->role === 'user'){
+        if (\Auth::User()->role === 'user') {
             return redirect('userHome');
         }
         $customer = $this->adminService->allCustomer();
@@ -35,7 +35,7 @@ class HomeController extends Controller
         $order = $this->adminService->allOrder();
         $transaction = $this->adminService->allTransaction();
         //return $transaction;
-        return view('home', compact('customer','order','transaction','rider'));
+        return view('home', compact('customer', 'order', 'transaction', 'rider'));
     }
 
     public function customerList()
@@ -48,7 +48,7 @@ class HomeController extends Controller
     {
         $transaction = $this->adminService->allTransaction();
         $transactionDetail = $this->adminService->detailTransaction();
-        return view('admin.totalTransaction', compact('transaction','transactionDetail'));
+        return view('admin.totalTransaction', compact('transaction', 'transactionDetail'));
     }
 
     public function dateTransaction()
@@ -94,6 +94,47 @@ class HomeController extends Controller
     public function addRider()
     {
         return view('admin.addRider');
+    }
+
+    public function registerRider(Request $request)
+    {
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'min:11'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $data = $this->adminService->enterRider($request->all());
+        Session::flash('success', 'Rider Added Successfully');
+        return redirect('riderList');
+    }
+
+    public function riderList()
+    {
+        $rider = $this->adminService->riderList();
+        return view('admin.riderList', compact('rider'));
+    }
+
+    public function riderPending($riderID)
+    {
+        $riderDetails = $this->adminService->riderDetails($riderID);
+        $order = $this->adminService->riderPendingOrder($riderID);
+        return view('admin.riderPending', compact('order','riderDetails'));
+    }
+
+    public function riderTransit($riderID)
+    {
+        $riderDetails = $this->adminService->riderDetails($riderID);
+        $order = $this->adminService->riderTransitOrder($riderID);
+        return view('admin.riderTransit', compact('order','riderDetails'));
+    }
+
+    public function riderDelivered($riderID)
+    {
+        $riderDetails = $this->adminService->riderDetails($riderID);
+        $order = $this->adminService->riderDeliveredOrder($riderID);
+        return view('admin.riderDelivered', compact('order','riderDetails'));
     }
 
 }

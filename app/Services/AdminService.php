@@ -8,6 +8,7 @@ use App\PricePerKM;
 use App\Order;
 use App\Payment;
 use Session;
+use Illuminate\Support\Facades\Hash;
 
 class AdminService
 {
@@ -77,6 +78,43 @@ class AdminService
     public function orderDelivered()
     {
         return $this->order->where('status', 'delivered')->orderBy('id', 'desc')->paginate(30);
+    }
+
+    public function riderList()
+    {
+        return $this->user->where('role', 'rider')->orderBy('id', 'desc')->paginate(10);
+    }
+
+    public function enterRider(array $data)
+    {
+        User::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'phone' => $data['phone'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'role' => 'rider',
+        ]);
+    }
+
+    public function riderDetails($riderID)
+    {
+        return $this->user->where('id', $riderID)->first();
+    }
+
+    public function riderPendingOrder($riderID)
+    {
+        return $this->order->where('status', 'pending')->where('riderID', $riderID)->orderBy('id', 'desc')->get();
+    }
+
+    public function riderTransitOrder($riderID)
+    {
+        return $this->order->where('status', 'transit')->where('riderID', $riderID)->orderBy('id', 'desc')->get();
+    }
+
+    public function riderDeliveredOrder($riderID)
+    {
+        return $this->order->where('status', 'delivered')->where('riderID', $riderID)->orderBy('id', 'desc')->get();
     }
 
 }

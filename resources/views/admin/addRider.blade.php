@@ -4,168 +4,102 @@
 <div class="container">
     <div class="row">
 
-        <div class="panel panel-primary col-lg-10" style="margin-top: 30px;">
-            <div class="panel-heading">Delivered Order</div>
+        <div class="col-md-12" style="margin-top: 30px;"></div>
+        <div class="col-md-3"></div>
+
+        <div class="panel panel-primary col-md-4">
+            <div class="panel-heading">Add a Rider <i class="fa fa-motorcycle"></i></div>
             <div class="panel-body">
-                <!-- <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Enter Firstname to search" title="Type in a name"> -->
+                <form action="{{ url('/registerRider') }}" method="post">
+                    @csrf
 
-                <table class="table table-bordered" id="myTable">
-                    {{ $order->links() }}
-                    <tr>
-                        <th>Date/Time</th>
-                        <th></th>
-                        <th>Order ID</th>
-                        <th>Status</th>
-                        <th></th>
-                        <th>Pickup Address</th>
-                        <th>Delivery Address</th>
-                        <th>Receiver Name</th>
-                        <th>Receiver Phone</th>
-                        <th>Distance</th>
-                        <th>Weight</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                    </tr>
-                    @foreach($order as $orders)
-                    <tr>
-                        <td>{{ $orders->created_at }}</td>
-                        <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{ $orders->customer_id }}">Customer Details</button></td>
-                        <td>{{ $orders->orderID }}</td>
-                        <td>
-                            @if($orders->status === 'pending')
-                            <div class="text-danger">{{ $orders->status }}</div>
-                            @elseif($orders->status === 'transit')
-                            <div class="text-warning">{{ $orders->status }}</div>
-                            @elseif($orders->status === 'delivered')
-                            <div class="text-success">{{ $orders->status }}</div>
-                            @endif
-                        </td>
-                        <td>
-                          @if($orders->riderID != NULL)
-                          <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myRider{{ $orders->riderID }}"><i class="fa fa-motorcycle"></i></button>
-                          @endif
-                        </td>
-                        <td>{{ $orders->pickup_address }}</td>
-                        <td>{{ $orders->delivery_address }}</td>
-                        <td>{{ $orders->receiver_name }}</td>
-                        <td>{{ $orders->receiver_phone }}</td>
-                        <td>{{ $orders->distance }}</td>
-                        <td>{{ $orders->weight }}</td>
-                        <td>{{ $orders->item }}</td>
-                        <td>{{ $orders->quantity }}</td>
-                    </tr>
-                    <!-- Trigger the modal with a button -->
+                    <div class="agile-field-txt form-group has-feedback {{ $errors->has('first_name') ? ' has-error' : '' }}">
+                        <label>
+                            First Name:</label>
+                        <input type="text" name="first_name" class="form-control" placeholder="Enter First Name" value="{{ old('first_name') }}" required="" />
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        @if ($errors->has('first_name'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('first_name') }}</strong>
+                        </span>
+                        @endif
+                    </div>
 
+                    <div class="agile-field-txt form-group has-feedback {{ $errors->has('last_name') ? ' has-error' : '' }}">
+                        <label>
+                            Last Name:</label>
+                        <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name" value="{{ old('last_name') }}" required="" />
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        @if ($errors->has('last_name'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('last_name') }}</strong>
+                        </span>
+                        @endif
+                    </div>
 
-<!-- Modal -->
-<div id="myModal{{ $orders->customer_id }}" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+                    <div class="agile-field-txt form-group has-feedback {{ $errors->has('phone') ? ' has-error' : '' }}">
+                        <label>
+                            Phone:</label>
+                        <input type="text" name="phone" class="form-control" placeholder="Enter Phone" value="{{ old('phone') }}" required="" />
+                        <span class="glyphicon glyphicon-mobile form-control-feedback"></span>
+                        @if ($errors->has('phone'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('phone') }}</strong>
+                        </span>
+                        @endif
+                    </div>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Customer Details</h4>
-      </div>
-      <div class="modal-body">
-        <p>{{ $orders->id }}
-            <?php
-                $details = DB::table('users')->where('id', $orders->customer_id)->first();
-            ?>
-            <p>Customer Name: <b>{{ $details->first_name.' '.$details->last_name }}</b></p>
-            <p>Phone: <b>{{ $details->phone }}</b></p>
-            <p>Email: <b>{{ $details->email }}</b></p>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
+                    <div id="locationField" class="agile-field-txt form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label>
+                            Email Address:</label>
+                        <input type="text" name="email" class="form-control" placeholder="Enter Email Address" value="{{ old('email') }}" required="" />
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                        @endif
+                    </div>
 
-  </div>
-</div>
-<!-- RIDER MODAL -->
-<!-- Modal -->
-@if($orders->riderID != NULL)
-<div id="myRider{{ $orders->riderID }}" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+                    <div class="agile-field-txt form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label>
+                            Password:</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter Password " required="" />
+                        @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                        @endif
+                    </div>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Despatch Rider</h4>
-      </div>
-      <div class="modal-body">
-        <p>
-            <?php
-                $details = DB::table('users')->where('id', $orders->riderID)->first();
-            ?>
-            <p>Rider Name: <b>{{ $details->first_name.' '.$details->last_name }}</b></p>
-            <p>Phone: <b>{{ $details->phone }}</b></p>
-            <p>Rider Email: <b>{{ $details->email }}</b></p>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
+                    <div class="agile-field-txt form-group has-feedback {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                        <label>
+                            Re-type Password:</label>
+                        <input type="password" name="password_confirmation" class="form-control" class="form-control" placeholder="Confirm password">
+                        @if ($errors->has('password_confirmation'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                        </span>
+                        @endif
+                    </div>
 
-  </div>
-</div>
-@endif
-<!-- RIDER MODAL -->
-                    @endforeach
-                    <tr>
-                        <th>Date/Time</th>
-                        <th></th>
-                        <th>Order ID</th>
-                        <th>Status</th>
-                        <th></th>
-                        <th>Pickup Address</th>
-                        <th>Delivery Address</th>
-                        <th>Receiver Name</th>
-                        <th>Receiver Phone</th>
-                        <th>Distance</th>
-                        <th>Weight</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                    </tr>
+                    <div class="w3ls-contact  w3l-sub">
+                        <input type="submit" class="btn btn-primary btn-block" value="Register">
+                    </div>
 
-                </table>
-                {{ $order->links() }}
+                </form>
             </div>
         </div>
 
-        <script>
-            function myFunction() {
-                var input, filter, table, tr, td, i, txtValue;
-                input = document.getElementById("myInput");
-                filter = input.value.toUpperCase();
-                table = document.getElementById("myTable");
-                tr = table.getElementsByTagName("tr");
-                for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[0];
-                    if (td) {
-                        txtValue = td.textContent || td.innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                        } else {
-                            tr[i].style.display = "none";
-                        }
-                    }
-                }
-            }
-        </script>
     </div>
 </div>
 <style>
-    #myTable{
-        height:500px; 
+    #myTable {
+        height: 500px;
         width: 900px;
         overflow-x: scroll;
-        overflow-y:scroll; 
-        display:block;
+        overflow-y: scroll;
+        display: block;
     }
 </style>
 @endsection

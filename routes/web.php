@@ -47,7 +47,12 @@ Route::group(['middleware' => ['verified','AdminRole']], function () {
     Route::get('/enrouteOrder', 'HomeController@enrouteOrder')->name('enrouteOrder');
     Route::get('/deliveredOrder', 'HomeController@deliveredOrder')->name('deliveredOrder');
     Route::get('/addRider', 'HomeController@addRider')->name('addRider');
+    Route::get('/riderList', 'HomeController@riderList')->name('riderList');
+    Route::get('riderPending/{riderID}', 'HomeController@riderPending');
+    Route::get('riderTransit/{riderID}', 'HomeController@riderTransit');
+    Route::get('riderDelivered/{riderID}', 'HomeController@riderDelivered');
     Route::post('/getDateTransaction', 'HomeController@getDateTransaction')->name('getDateTransaction');
+    Route::post('/registerRider', 'HomeController@registerRider')->name('registerRider');
 });
 
 Auth::routes(['verify' => true]);

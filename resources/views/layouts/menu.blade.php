@@ -7,3 +7,4 @@
 <li><a href="{{ route('enrouteOrder') }}">Enroute Order</a></li>
 <li><a href="{{ route('deliveredOrder') }}">Delivered Order</a></li>
 <li><a href="{{ route('addRider') }}">Add Rider</a></li>
+<li><a href="{{ route('riderList') }}">Rider List</a></li>
